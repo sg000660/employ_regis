@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EmployeeForm from './Employee';
+import EmployeeList from './employeeList';  // Import EmployeeList component
 import NavBar from './Navbar'; // Import the NavBar component
 
 const App = () => {
@@ -10,13 +11,12 @@ const App = () => {
         {/* Add NavBar component here */}
         <NavBar />
 
-        <div className="my-6 text-center">
-          <h2 className="text-2xl font-semibold">Welcome to the Employee Management System</h2>
-        </div>
-
         <Routes>
           {/* Route for the Employee Registration Form */}
           <Route path="/" element={<EmployeeForm />} />
+          
+          {/* Route for the Employee List */}
+          <Route path="/employees" element={<EmployeeList />} />
         </Routes>
       </div>
     </Router>
