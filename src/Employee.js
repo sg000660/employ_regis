@@ -11,6 +11,9 @@ const EmployeeForm = () => {
     department: '',
   });
 
+  // State to hold the list of employees
+  const [employees, setEmployees] = useState([]);
+
   // State for departments
   const departments = ['HR', 'Engineering', 'Sales', 'Marketing'];
 
@@ -24,72 +27,111 @@ const EmployeeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Perform form submission (you can connect it to an API to submit the data)
+    // Add the new employee to the employee list
+    setEmployees([...employees, employee]);
+
+    // Reset the form fields
+    setEmployee({
+      id: '',
+      name: '',
+      age: '',
+      contact: '',
+      email: '',
+      department: '',
+    });
+
     alert('Employee Registered Successfully!');
     console.log(employee); // You can replace this with an API call
   };
 
+  // Function to filter employees by department
+  const filterByDepartment = (department) => {
+    return employees.filter((emp) => emp.department === department);
+  };
+
   return (
-    <div style={styles.container}>
-      <h1>Employee Registration Form</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label>Employee ID</label>
+    <div className="max-w-lg mx-auto my-12 p-6 bg-gray-100 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-semibold text-center mb-4">Employee Registration Form</h1>
+
+      {/* Buttons for employee list */}
+      <div className="mb-6 text-center">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded mr-4 hover:bg-blue-600"
+          onClick={() => alert(JSON.stringify(employees))}
+        >
+          List of All Employees
+        </button>
+        <button
+          className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
+          onClick={() => {
+            departments.forEach((dept) => {
+              const filteredEmployees = filterByDepartment(dept);
+              console.log(`Employees in ${dept} Department:`, filteredEmployees);
+            });
+          }}
+        >
+          List Employees by Department
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-col">
+        <label className="mb-2 font-medium">Employee ID</label>
         <input
           type="text"
           name="id"
           value={employee.id}
           onChange={handleChange}
           required
-          style={styles.input}
+          className="mb-4 p-2 border border-gray-300 rounded"
         />
 
-        <label>Name</label>
+        <label className="mb-2 font-medium">Name</label>
         <input
           type="text"
           name="name"
           value={employee.name}
           onChange={handleChange}
           required
-          style={styles.input}
+          className="mb-4 p-2 border border-gray-300 rounded"
         />
 
-        <label>Age</label>
+        <label className="mb-2 font-medium">Age</label>
         <input
           type="number"
           name="age"
           value={employee.age}
           onChange={handleChange}
           required
-          style={styles.input}
+          className="mb-4 p-2 border border-gray-300 rounded"
         />
 
-        <label>Contact Number</label>
+        <label className="mb-2 font-medium">Contact Number</label>
         <input
           type="tel"
           name="contact"
           value={employee.contact}
           onChange={handleChange}
           required
-          style={styles.input}
+          className="mb-4 p-2 border border-gray-300 rounded"
         />
 
-        <label>Email</label>
+        <label className="mb-2 font-medium">Email</label>
         <input
           type="email"
           name="email"
           value={employee.email}
           onChange={handleChange}
           required
-          style={styles.input}
+          className="mb-4 p-2 border border-gray-300 rounded"
         />
 
-        <label>Department</label>
+        <label className="mb-2 font-medium">Department</label>
         <select
           name="department"
           value={employee.department}
           onChange={handleChange}
           required
-          style={styles.input}
+          className="mb-4 p-2 border border-gray-300 rounded"
         >
           <option value="">Select Department</option>
           {departments.map((department, index) => (
@@ -99,41 +141,15 @@ const EmployeeForm = () => {
           ))}
         </select>
 
-        <button type="submit" style={styles.button}>Register</button>
+        <button
+          type="submit"
+          className="bg-green-500 text-white p-2 rounded cursor-pointer hover:bg-green-600 transition duration-300"
+        >
+          Register
+        </button>
       </form>
     </div>
   );
-};
-
-// Styling
-const styles = {
-  container: {
-    maxWidth: '500px',
-    margin: '50px auto',
-    padding: '20px',
-    backgroundColor: '#f9f9f9',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    fontFamily: 'Arial, sans-serif',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    marginBottom: '15px',
-    padding: '10px',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-  },
-  button: {
-    backgroundColor: '#28a745',
-    color: '#fff',
-    padding: '10px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
 };
 
 export default EmployeeForm;

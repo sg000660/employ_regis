@@ -9,7 +9,7 @@ const App = () => {
         <h1>Welcome to the Employee Management System</h1>
         <Routes>
           {/* Route for the Employee Registration Form */}
-          <Route path="/register" element={<EmployeeForm />} />
+          <Route path="/" element={<EmployeeForm />} />
         </Routes>
       </div>
     </Router>
