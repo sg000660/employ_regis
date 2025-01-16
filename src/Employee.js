@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const EmployeeForm = () => {
-  const navigate = useNavigate(); // Hook to navigate programmatically
-
   // State to hold form data
   const [employee, setEmployee] = useState({
     id: '',
@@ -19,6 +17,9 @@ const EmployeeForm = () => {
 
   // State for departments
   const departments = ['HR', 'Engineering', 'Sales', 'Marketing'];
+
+  // Hook for navigation
+  const navigate = useNavigate();
 
   // Handle input changes
   const handleChange = (e) => {
@@ -47,6 +48,21 @@ const EmployeeForm = () => {
     console.log(employee); // You can replace this with an API call
   };
 
+  // Function to filter employees by department
+  const filterByDepartment = (department) => {
+    return employees.filter((emp) => emp.department === department);
+  };
+
+  // Handle the navigation to EmployeeList page
+  const navigateToEmployeeList = () => {
+    navigate('/employee-list'); // Navigate to the EmployeeList page
+  };
+
+  // Handle navigation to Employees by Department page
+  const navigateToEmployeesByDepartment = () => {
+    navigate('/employees-by-department', { state: { employees } }); // Passing employees data to the new page
+  };
+
   return (
     <div className="max-w-lg mx-auto my-12 p-6 bg-gray-100 rounded-lg shadow-lg">
       <h1 className="text-2xl font-semibold text-center mb-4">Employee Registration Form</h1>
@@ -55,13 +71,13 @@ const EmployeeForm = () => {
       <div className="mb-6 text-center">
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded mr-4 hover:bg-blue-600"
-          onClick={() => navigate('/employees')} // Navigate to Employee List page
+          onClick={navigateToEmployeeList} // On click, navigate to the employee list page
         >
           List of All Employees
         </button>
         <button
           className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
-          onClick={() => alert(JSON.stringify(employees))}
+          onClick={navigateToEmployeesByDepartment} // On click, navigate to the employees by department page
         >
           List Employees by Department
         </button>
