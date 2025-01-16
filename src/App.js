@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EmployeeForm from './Employee';
+import EmployeeList from './employeeList'; // Import the EmployeeList component
 import NavBar from './Navbar'; // Import the NavBar component
 
 const App = () => {
@@ -15,8 +16,11 @@ const App = () => {
         </div>
 
         <Routes>
-          {/* Route for the Employee Registration Form */}
+          {/* Route for Employee Registration Form */}
           <Route path="/" element={<EmployeeForm />} />
+
+          {/* Route for Employee List */}
+          <Route path="/employee-list" element={<EmployeeList />} />
         </Routes>
       </div>
     </Router>
