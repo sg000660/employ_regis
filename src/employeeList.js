@@ -11,32 +11,34 @@ const EmployeeList = () => {
   };
 
   return (
-    <div>
+    <div className="p-6 bg-gray-100 min-h-screen">
       <EmployeeForm addEmployee={addEmployee} />
-      <h2>Employee List</h2>
+
+      <h2 className="text-2xl font-semibold text-center my-6">Employee List</h2>
+
       {employees.length === 0 ? (
-        <p>No employees registered yet.</p>
+        <p className="text-center text-gray-500">No employees registered yet.</p>
       ) : (
-        <table style={styles.table}>
-          <thead>
+        <table className="min-w-full bg-white border-collapse shadow-lg rounded-lg overflow-hidden">
+          <thead className="bg-gray-200">
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Contact</th>
-              <th>Email</th>
-              <th>Department</th>
+              <th className="px-4 py-2 border-b text-left">ID</th>
+              <th className="px-4 py-2 border-b text-left">Name</th>
+              <th className="px-4 py-2 border-b text-left">Age</th>
+              <th className="px-4 py-2 border-b text-left">Contact</th>
+              <th className="px-4 py-2 border-b text-left">Email</th>
+              <th className="px-4 py-2 border-b text-left">Department</th>
             </tr>
           </thead>
           <tbody>
             {employees.map((employee, index) => (
-              <tr key={index}>
-                <td>{employee.id}</td>
-                <td>{employee.name}</td>
-                <td>{employee.age}</td>
-                <td>{employee.contact}</td>
-                <td>{employee.email}</td>
-                <td>{employee.department}</td>
+              <tr key={index} className="hover:bg-gray-100">
+                <td className="px-4 py-2 border-b">{employee.id}</td>
+                <td className="px-4 py-2 border-b">{employee.name}</td>
+                <td className="px-4 py-2 border-b">{employee.age}</td>
+                <td className="px-4 py-2 border-b">{employee.contact}</td>
+                <td className="px-4 py-2 border-b">{employee.email}</td>
+                <td className="px-4 py-2 border-b">{employee.department}</td>
               </tr>
             ))}
           </tbody>
@@ -44,24 +46,6 @@ const EmployeeList = () => {
       )}
     </div>
   );
-};
-
-// Styling
-const styles = {
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginTop: '20px',
-  },
-  tableHeader: {
-    backgroundColor: '#f4f4f4',
-    textAlign: 'left',
-    padding: '10px',
-  },
-  tableRow: {
-    textAlign: 'left',
-    padding: '10px',
-  },
 };
 
 export default EmployeeList;
